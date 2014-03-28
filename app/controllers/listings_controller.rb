@@ -4,4 +4,7 @@ class ListingsController < ApplicationController
 
   end
 
+  def create
+  end
+
 end

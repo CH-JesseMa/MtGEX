@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  card: MyString
+  edition: MyString
+  type: false
+  condition: 
+  price: 1.5
+  description: MyText
+  image: MyText
+
+two:
+  card: MyString
+  edition: MyString
+  type: false
+  condition: 
+  price: 1.5
+  description: MyText
+  image: MyText
