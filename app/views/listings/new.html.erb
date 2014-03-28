@@ -14,12 +14,22 @@
   </p>
 
   <p>
+    <%= f.label :type %>
+    <br>
+    <%= select_tag(:type, options_for_select([['Non-Foil', 1], ['Foil', 2]], 1)) %>
+  </p>
+<!--   <p>
     <%= check_box_tag(:type) %>
     <%= label_tag(:type, "Foil") %>
     <br>
-  </p>
+  </p> -->
 
   <p>
+    <%= f.label :condition %>
+    <br>
+    <%= select_tag(:condition, options_for_select([['Near Mint', 1], ['Slightly Played', 2], ['Moderately Played', 3], ['Heavily Played', 4]], 1)) %>
+  </p>
+  <!-- <p>
     <%= radio_button_tag(:condition, "Near Mint") %>
     <%= label_tag(:condition, "Near Mint") %>
     <br>
@@ -35,7 +45,7 @@
     <%= radio_button_tag(:condition, "Heavily Played") %>
     <%= label_tag(:condition, "Heavily Played") %>
     <br>
-  </p>
+  </p> -->
 
   <p>
     <%= f.label :quantity %><br>
