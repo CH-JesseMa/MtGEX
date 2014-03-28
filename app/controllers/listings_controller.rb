@@ -13,6 +13,7 @@ class ListingsController < ApplicationController
     @listing = Listing.find(params[:id])
   end
 
+private
 
   def listing_params
     params.require(:listing).permit(
@@ -26,8 +27,6 @@ class ListingsController < ApplicationController
       :image_front,
       :image_back)
   end
-private
-
 
 
 end
