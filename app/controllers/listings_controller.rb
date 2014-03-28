@@ -13,13 +13,15 @@ class ListingsController < ApplicationController
     @listing = Listing.find(params[:id])
   end
 
+binding.pry
+
 private
 
   def listing_params
     params.require(:listing).permit(
       :card,
       :edition,
-      :type,
+      :card_type,
       :condition,
       :quantity,
       :price,
