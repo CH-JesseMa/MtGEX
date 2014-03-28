@@ -1,0 +1,39 @@
+<h1>New Listing</h1>
+
+<%= form_for :listing do |f| %>
+  <p>
+    <%= f.label :card %><br>
+    <%= f.text_field :card %>
+  </p>
+
+  <p>
+    <%= f.label :price %><br>
+    <%= f.text_field :price %>
+  </p>
+
+  <p>
+    <%= radio_button_tag(:condition, "Near Mint") %><br>
+    <%= label_tag(:condition, "Near Mint") %>
+    <%= radio_button_tag(:condition, "Slightly Played") %><br>
+    <%= label_tag(:condition, "Slightly Played") %>
+    <%= radio_button_tag(:condition, "Moderately Played") %><br>
+    <%= label_tag(:condition, "Moderately Played") %>
+    <%= radio_button_tag(:condition, "Heavily Played") %><br>
+    <%= label_tag(:condition, "Heavily Played") %>
+  </p>
+
+  <p>
+    <%= options_for_select([['Near Mint', 1], ['Slightly
+      Played', 2], ['Moderately Played', 3], ['Heavily
+      Played', 4]], 1) %>
+  </p>
+
+  <p>
+    <%= f.label :quantity %><br>
+    <%= f.text_area :quantity %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
