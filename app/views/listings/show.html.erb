@@ -1,7 +1,10 @@
 <p>
   <strong>Images:</strong>
-  <%= @listing.image_front %>
-  <%= @listing.image_back %>
+
+  <img src=" <%= @listing.image_front %>" alt="<%= @listing.card %>">
+
+  <img src=" <%= @listing.image_back %>" alt="<%= @listing.card %>">
+
 </p>
 
 <p>
@@ -31,10 +34,10 @@
 
 <p>
   <strong>Price:</strong>
-  <%= @post.price %>
+  <%= @listing.price %>
 </p>
 
 <p>
   <strong>Description:</strong>
-  <%= @post.description %>
+  <%= @listing.description %>
 </p>
