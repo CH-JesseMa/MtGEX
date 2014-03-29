@@ -1,6 +1,19 @@
 <h1>New Listing</h1>
 
 <%= form_for :listing, url: listings_path do |f| %>
+
+  <% if @listing.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@listing.errors.count, "error") %> prohibited
+        this listing from being saved:</h2>
+      <ul>
+      <% @listing.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <p>
     <%= f.label :card %>
     <br>
