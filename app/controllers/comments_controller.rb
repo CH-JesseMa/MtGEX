@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
     redirect_to listing_path(@listing)
   end
 
-  def delete
+  def destroy
     @listing = Listing.find(params[:listing_id])
     @comment = @listing.comments.find(params[:id])
     @comment.destroy

@@ -1,31 +1,32 @@
-<p>
-  <strong>Card:</strong>
-  <%= @listing.card %>
+<p><%= link_to 'Edit Listing', edit_listing_path(@listing) %>
+<%= link_to 'Delete Listing', listing_path(@listing),
+              method: :delete, data: { confirm: 'Are you sure?' } %>
 </p>
+<table>
+  <tr>
+    <th>Card</th>
+    <th>Edition</th>
+    <th>Type</th>
+  </tr>
 
-<p>
-  <strong>Edition:</strong>
-  <%= @listing.edition %>
-</p>
+  <tr>
+    <td><%= @listing.card %></td>
+    <td><%= @listing.edition %></td>
+    <td><%= @listing.card_type %></td>
+  </tr>
+</table>
 
-<p>
-  <strong>Type:</strong>
-  <%= @listing.card_type %></p>
+<table>
+  <tr>
+    <th>Condition</th>
+    <th>Price</th>
+  </tr>
 
-<p>
-  <strong>Condition:</strong>
-  <%= @listing.condition %>
-</p>
-
-<p>
-  <strong>Quantity:</strong>
-  <%= @listing.quantity %>
-</p>
-
-<p>
-  <strong>Price:</strong>
-  <%= @listing.price %>
-</p>
+  <tr>
+    <td><%= @listing.condition %></td>
+    <td><%= @listing.price %></td>
+  </tr>
+</table>
 
 <p>
   <strong>Description:</strong>
@@ -33,9 +34,9 @@
 </p>
 
 <p>
-  <img src=" <%= @listing.image_front %>" width="300px" alt="<%= @listing.card %>">
+  <img src=" <%= @listing.image_front %>" width="200px" alt="<%= @listing.card %>">
 
-  <img src=" <%= @listing.image_back %>" width="300px" alt="<%= @listing.card %>">
+  <img src=" <%= @listing.image_back %>" width="200px" alt="<%= @listing.card %>">
 </p>
 
 <h2>Comments</h2>
