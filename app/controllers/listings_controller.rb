@@ -27,7 +27,7 @@ class ListingsController < ApplicationController
 
   def update
 
-    @listing = listing.find(params[:id])
+    @listing = Listing.find(params[:id])
 
     if @listing.update(params[:listing].permit(
       :card,

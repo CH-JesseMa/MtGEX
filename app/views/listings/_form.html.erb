@@ -1,0 +1,72 @@
+<%= form_for @listing do |f| %>
+
+  <% if @listing.errors.any? %>
+    <div id="error_explanation">
+      <h3><%= pluralize(@listing.errors.count, "error") %> prohibited
+        this listing from being saved:</h3>
+      <ul>
+      <% @listing.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= f.label :card %>
+    <br>
+    <%= f.text_field :card %>
+  </p>
+
+  <p>
+    <%= f.label :edition %>
+    <br>
+    <%= f.text_field :edition %>
+  </p>
+
+  <p>
+    <%= f.label :card_type %>
+    <br>
+    <%= f.select(:card_type, options_for_select([['Non-Foil', 'Non-Foil'], ['Foil', 'Foil']], 1)) %>
+  </p>
+
+  <p>
+    <%= f.label :condition %>
+    <br>
+    <%= f.select(:condition, options_for_select([['Near Mint', 1], ['Slightly Played', 2], ['Moderately Played', 3], ['Heavily Played', 4]], 1)) %>
+  </p>
+
+  <p>
+    <%= f.label :quantity %><br>
+    <%= f.text_field :quantity %>
+  </p>
+
+  <p>
+    <%= f.label :price %>
+    <br>
+    <%= f.text_field :price %>
+    <br>
+  </p>
+
+  <p>
+    <%= f.label :description %>
+    <br>
+    <%= f.text_area :description %>
+  </p>
+
+  <p>
+    <%= f.label :image_front %>
+    <br>
+    <%= url_field(:listing, :image_front) %>
+  </p>
+
+  <p>
+    <%= f.label :image_back %>
+    <br>
+    <%= url_field(:listing, :image_back) %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
