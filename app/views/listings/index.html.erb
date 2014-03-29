@@ -2,6 +2,7 @@
 
 <table>
   <tr>
+    <th>Listed</th>
     <th>Card</th>
     <th>Edition</th>
     <th>Type</th>
@@ -13,6 +14,7 @@
 
   <% @listings.each do |listing| %>
     <tr>
+      <td><%= listing.created_at %></td>
       <td><%= listing.card %></td>
       <td><%= listing.edition %></td>
       <td><%= listing.card_type %></td>
