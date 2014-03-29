@@ -21,6 +21,30 @@ class ListingsController < ApplicationController
     @listings = Listing.all(:order => "created_at DESC")
   end
 
+  def edit
+    @listing = Listing.find(params[:id])
+  end
+
+  def update
+
+    @listing = listing.find(params[:id])
+
+    if @listing.update(params[:listing].permit(
+      :card,
+      :edition,
+      :card_type,
+      :condition,
+      :quantity,
+      :price,
+      :description,
+      :image_front,
+      :image_back))
+      redirect_to @listing
+    else
+      render 'edit'
+    end
+  end
+
 private
 
   def listing_params
