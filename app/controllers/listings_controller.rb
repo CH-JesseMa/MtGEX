@@ -14,7 +14,7 @@ class ListingsController < ApplicationController
   end
 
   def index
-    @listings = Listing.all(:order => "created_at DESC"))
+    @listings = Listing.all(:order => "created_at DESC")
   end
 
 private
@@ -31,6 +31,4 @@ private
       :image_front,
       :image_back)
   end
-
-
 end
