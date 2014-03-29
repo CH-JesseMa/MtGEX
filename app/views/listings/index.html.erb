@@ -1,0 +1,24 @@
+<h1>All Listings</h1>
+
+<table>
+  <tr>
+    <th>Card</th>
+    <th>Edition</th>
+    <th>Type</th>
+    <th>Condition</th>
+    <th>Quantity</th>
+    <th>Price</th>
+
+  </tr>
+
+  <% @listings.each do |listing| %>
+    <tr>
+      <td><%= listing.card %></td>
+      <td><%= listing.edition %></td>
+      <td><%= listing.card_type %></td>
+      <td><%= listing.condition %></td>
+      <td><%= listing.quantity %></td>
+      <td><%= listing.price %></td>
+    </tr>
+  <% end %>
+</table>

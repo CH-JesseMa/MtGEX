@@ -13,7 +13,9 @@ class ListingsController < ApplicationController
     @listing = Listing.find(params[:id])
   end
 
-binding.pry
+  def index
+    @listings = Listing.all
+  end
 
 private
 
