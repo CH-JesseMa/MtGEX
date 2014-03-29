@@ -1,4 +1,5 @@
 class Listing < ActiveRecord::Base
+  has many :comments
   validates :card, presence: true
   validates :edition, presence: true
   validates :quantity, presence: true
