@@ -21,6 +21,8 @@
       <td><%= listing.condition %></td>
       <td><%= listing.quantity %></td>
       <td><%= listing.price %></td>
+      <td><%= link_to 'View Listing', listing %></td>
+      <td><%= link_to '(Edit Listing)', edit_listing_path(listing) %></td>
     </tr>
   <% end %>
 </table>

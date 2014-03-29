@@ -1,4 +1,4 @@
-<h1>Edit My Listing</h1>
+<h1>Edit My Listing | <%= link_to 'Edit', edit_listing_path(@listing) %></h1>
 
 <%= form_for :listing, url: listing_path(@listing), method: :patch do |f| %>
   <% if @listing.errors.any? %>
