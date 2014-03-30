@@ -1,5 +1,7 @@
 <p>
-  <%= link_to 'Edit Listing', edit_listing_path(@listing) %>
+  <% if current_user.admin or current_user == @listing.user %>
+    <%= link_to 'Edit Listing', edit_listing_path(@listing) %>
+  <% end %>
   <% if current_user.admin %>
     <%= link_to 'Delete', listing_path(@listing),
       method: :delete, data: { confirm: 'Are you sure?' } %>
@@ -10,6 +12,10 @@
 <p>
   <strong>Seller:</strong>
   <%= @listing.user.username %>
+</p>
+<p>
+  <strong>Listed on:</strong>
+  <%= @listing.created_at.strftime("%B %d, %Y  at %I:%M %p") %>
 </p>
 <p>
   <strong>Edition:</strong>
