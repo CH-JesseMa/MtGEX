@@ -1,15 +1,9 @@
 <p>
-  <strong>Commenter:</strong>
-  <%= comment.commenter %>
-</p>
+  <strong><%= comment.commenter %> said:</strong> '<%= comment.body %>'
 
-<p>
-  <strong>Comment:</strong>
-  <%= comment.body %>
-</p>
-
-<p>
-  <%= link_to 'Delete Comment', [comment.listing, comment],
-               method: :delete,
-               data: { confirm: 'Are you sure?' } %>
+  <% if current_user.admin or current_user == comment.commenter %>
+    <%= link_to 'Delete Comment', [comment.listing, comment],
+                 method: :delete,
+                 data: { confirm: 'Are you sure?' } %>
+  <% end %>
 </p>
