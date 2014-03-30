@@ -8,7 +8,7 @@
     <th>Type</th>
     <th>Condition</th>
     <th>Price</th>
-
+    <th>Listed By</th>
   </tr>
 
   <% @listings.each do |listing| %>
@@ -19,6 +19,7 @@
       <td><%= listing.card_type %></td>
       <td><%= listing.condition %></td>
       <td><%= listing.price %></td>
+      <td><%= listing.user_id %></td>
       <td><%= link_to 'View Listing', listing %></td>
       <td><%= link_to '(Edit Listing)', edit_listing_path(listing) %></td>
       <td>

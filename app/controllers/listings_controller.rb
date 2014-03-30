@@ -5,7 +5,7 @@ class ListingsController < ApplicationController
   end
 
   def create
-    @listing = Listing.new(listing_params)
+    @listing = current_user.listings.build(listing_params)
     if @listing.save
       redirect_to @listing
     else
@@ -15,6 +15,7 @@ class ListingsController < ApplicationController
 
   def show
     @listing = Listing.find(params[:id])
+    # @user = User.find(listing.user_id)
   end
 
   def index

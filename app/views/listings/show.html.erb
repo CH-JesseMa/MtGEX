@@ -1,7 +1,7 @@
 <p>
   <%= link_to 'Edit Listing', edit_listing_path(@listing) %>
   <% if current_user.admin %>
-    <%= link_to 'Delete', listing_path(listing),
+    <%= link_to 'Delete', listing_path(@listing),
       method: :delete, data: { confirm: 'Are you sure?' } %>
   <% end %>
 </p>
