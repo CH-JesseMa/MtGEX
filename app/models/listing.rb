@@ -1,5 +1,5 @@
 class Listing < ActiveRecord::Base
-  has_one :user, class_name: "User", foreign_key: "user_id"
+  belongs_to :user
   has_many :comments, dependent: :destroy
   validates :card, presence: true
   validates :edition, presence: true

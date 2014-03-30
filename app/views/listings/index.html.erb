@@ -19,7 +19,8 @@
       <td><%= listing.card_type %></td>
       <td><%= listing.condition %></td>
       <td><%= listing.price %></td>
-      <td><%= listing.user_id %></td>
+      <td><%= User.find_by(id: (listing.user_id)).username %></td>
+<%= binding.pry %>
       <td><%= link_to 'View Listing', listing %></td>
       <td><%= link_to '(Edit Listing)', edit_listing_path(listing) %></td>
       <td>
