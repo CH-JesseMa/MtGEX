@@ -8,8 +8,22 @@
 </head>
 <body>
 <h1>MtGEX</h1>
-<%= link_to 'All Listings', listings_path %>
-<%= link_to 'List a New Card', new_listing_path %>
+  <% if logged_in? %>
+
+    <p>
+      <%= link_to 'All Listings', listings_path %>
+      <%= link_to 'List a New Card', new_listing_path %>
+      <%= link_to 'Logout', logout_path %>
+    </p>
+
+  <% else %>
+
+    <p>
+      <%= link_to 'All Listings', listings_path %>
+      <%= link_to 'Register My Account', new_user_path %>
+      <%= link_to 'Login', session_new_path %>
+    </p>
+  <% end %>
 <%= yield %>
 
 </body>

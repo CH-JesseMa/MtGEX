@@ -1,4 +1,4 @@
-<h1>Users#New</h1>
+<h1>Register for a MtGEX Account</h1>
 
 <%= form_for(@user) do |f| %>
 
@@ -14,8 +14,8 @@
     </div>
   <% end %>
 
-  <%= f.label(:name) %>
-  <%= f.text_field(:name) %>
+  <%= f.label(:username) %>
+  <%= f.text_field(:username) %>
   <%= f.label(:email) %>
   <%= f.text_field(:email) %>
   <!-- these input controls will obscure the password -->
