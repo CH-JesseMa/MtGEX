@@ -21,8 +21,12 @@
       <td><%= listing.price %></td>
       <td><%= link_to 'View Listing', listing %></td>
       <td><%= link_to '(Edit Listing)', edit_listing_path(listing) %></td>
-      <td><%= link_to 'Delete', listing_path(listing),
-              method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td>
+        <% if current_user.admin %>
+          <%= link_to 'Delete', listing_path(listing),
+            method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% end %>
+      </td>
     </tr>
   <% end %>
 </table>
