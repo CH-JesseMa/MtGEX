@@ -1,16 +1,13 @@
 <% if logged_in? %>
   <%= form_for([@listing, Poll.new]) do |f| %>
-    <p>
     <%= f.hidden_field :user_id, :value =>current_user.id %>
-     <%= f.hidden_field :listing_id, :value =>@listing.id %>
+    <%= f.hidden_field :listing_id, :value =>@listing.id %>
     <%= f.select(:response, options_for_select([
         ['Near Mint', 1],
         ['Slightly Played', 2],
         ['Moderately Played', 3],
         ['Heavily Played', 4]], 1)
         ) %>
-
     <%= f.submit("Submit Grade") %>
-
   <% end %>
 <% end %>

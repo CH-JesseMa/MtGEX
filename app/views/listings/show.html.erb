@@ -28,11 +28,6 @@
 </p>
 
 <p>
-  <strong>Condition (according to seller):</strong>
-  <%= @listing.condition %>
-</p>
-
-<p>
   <strong>Price:</strong>
   <%= @listing.price %>
 </p>
@@ -43,7 +38,17 @@
 </p>
 
 <p>
-<strong>Your Grade Rating</strong>
+  <strong>Condition (according to seller):</strong>
+  <%= @listing.condition %>
+</p>
+
+<p>
+<strong>Average Grade Rating</strong> (based on <%= @listing.poll.length %> ratings):
+<%= ((@listing.poll.sum('response')/@listing.poll.length).round) %>
+</p>
+
+<p>
+<strong>Grade card:</strong>
 <%= render "polls/form" %>
 </p>
 

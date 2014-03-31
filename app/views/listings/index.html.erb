@@ -7,6 +7,8 @@
     <th>Edition</th>
     <th>Type</th>
     <th>Condition</th>
+    <th>Average Grade</th>
+    <th>Graders</th>
     <th>Price</th>
     <th>Listed By</th>
   </tr>
@@ -18,10 +20,16 @@
       <td><%= listing.edition %></td>
       <td><%= listing.card_type %></td>
       <td><%= listing.condition %></td>
+      <td><%= ((listing.poll.sum('response')/listing.poll.length).round) %></td>
+      <td><%= listing.poll.length %></td>
       <td><%= listing.price %></td>
       <td><%= listing.user.username %></td>
       <td><%= link_to 'View Listing', listing %></td>
-      <td><%= link_to '(Edit Listing)', edit_listing_path(listing) %></td>
+      <td>
+        <% if current_user.admin %>
+          <%= link_to '(Edit Listing)', edit_listing_path(listing) %>
+        <% end %>
+      </td>
       <td>
         <% if current_user.admin %>
           <%= link_to 'Delete', listing_path(listing),
