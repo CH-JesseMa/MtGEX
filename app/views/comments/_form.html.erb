@@ -1,13 +1,9 @@
-<%= form_for([@listing, @listing.comments.build]) do |f| %>
-  <p>
-    <INPUT type="text" name="commenter" value="<%= current_user.username %>">
-  </p>
-  <p>
-    <%= f.label :My_Comment %>
-    <br />
-    <%= f.text_area :body %>
-  </p>
-  <p>
-    <%= f.submit %>
-  </p>
+<% if logged_in? %>
+  <%= form_for [@listing, Comment.new] do |f| %>
+    <%= f.hidden_field :user_id, :value =>current_user.id %>
+    <%= f.text_field :body %>
+    <%= f.hidden_field :listing_id, :value => @listing.id %>
+    <%= f.submit 'Add Comment' %>
+  <% end %>
 <% end %>
+

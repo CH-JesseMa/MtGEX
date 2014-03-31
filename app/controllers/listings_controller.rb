@@ -30,6 +30,7 @@ class ListingsController < ApplicationController
     @listing = Listing.find(params[:id])
 
     if @listing.update(params[:listing].permit(
+      :id,
       :card,
       :edition,
       :card_type,

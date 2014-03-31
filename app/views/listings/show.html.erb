@@ -50,7 +50,19 @@
 
 
 <h2>Comments</h2>
-<%= render @listing.comments %>
+
+
+  <% @listing.comments.each do |comment| %>
+    <p>
+      <strong><%= comment.user.username %> said:</strong> '<%= comment.body %>'
+
+      <% if current_user.admin or current_user == comment.commenter %>
+        <%= link_to 'Delete Comment', [comment.listing, comment],
+                     method: :delete,
+                     data: { confirm: 'Are you sure?' } %>
+      <% end %>
+    </p>
+  <% end %>
 
 
 <h2>Add a comment:</h2>

@@ -1,5 +1,5 @@
 <p>
-  <strong><%= comment.commenter %> said:</strong> '<%= comment.body %>'
+  <strong><%= comment.user.username %> said:</strong> '<%= comment.body %>'
 
   <% if current_user.admin or current_user == comment.commenter %>
     <%= link_to 'Delete Comment', [comment.listing, comment],
