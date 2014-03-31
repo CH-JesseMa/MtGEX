@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140331153136) do
+ActiveRecord::Schema.define(version: 20140331203939) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,15 +30,15 @@ ActiveRecord::Schema.define(version: 20140331153136) do
     t.string   "card"
     t.string   "edition"
     t.string   "card_type"
-    t.string   "condition"
     t.integer  "price"
     t.text     "description"
     t.text     "image_front"
     t.text     "image_back"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "status"
+    t.boolean  "status",      default: true
     t.integer  "user_id"
+    t.integer  "condition"
   end
 
   create_table "polls", force: true do |t|
