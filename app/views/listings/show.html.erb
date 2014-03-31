@@ -1,5 +1,5 @@
 <p>
-  <% if current_user.admin or current_user == @listing.user %>
+  <% if current_user.admin || current_user == @listing.user %>
     <%= link_to 'Edit Listing', edit_listing_path(@listing) %>
   <% end %>
   <% if current_user.admin %>
@@ -15,7 +15,7 @@
 </p>
 <p>
   <strong>Listed on:</strong>
-  <%= @listing.created_at.strftime("%B %d, %Y  at %I:%M %p") %>
+  <%= @listing.created_at.strftime("%B %d, %Y at %I:%M %p") %>
 </p>
 <p>
   <strong>Edition:</strong>
@@ -44,7 +44,7 @@
 
 <p>
 <strong>Average Grade Rating</strong> (based on <%= @listing.poll.length %> ratings):
-<%= ((@listing.poll.sum('response')/@listing.poll.length).round) %>
+<%= (@listing.poll.average('response').round) %>
 </p>
 
 <p>
@@ -54,7 +54,6 @@
 
 <p>
   <img src=" <%= @listing.image_front %>" width="200px" alt="<%= @listing.card %>">
-
   <img src=" <%= @listing.image_back %>" width="200px" alt="<%= @listing.card %>">
 </p>
 
