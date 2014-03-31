@@ -43,8 +43,12 @@
 </p>
 
 <p>
-<strong>Average Grade Rating (based on <%= @listing.poll.length %> ratings): </strong>
-<%= @listing.poll.average('response').round %>
+  <strong>Average Grade Rating (based on <%= @listing.poll.length %> ratings): </strong>
+  <% if @listing.poll.sum('response') == 0 %>
+    0
+  <% else %>
+    <%= (@listing.poll.average('response')).round %>
+  <% end %>
 </p>
 
 <p>

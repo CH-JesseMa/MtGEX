@@ -20,7 +20,13 @@
       <td><%= listing.edition %></td>
       <td><%= listing.card_type %></td>
       <td><%= listing.condition %></td>
-      <td><%= listing.poll.average('response').round %></td>
+      <td>
+        <% if listing.poll.sum('response') == 0 %>
+          0
+        <% else %>
+          <%= (listing.poll.average('response')).round %>
+        <% end %>
+      </td>
       <td><%= listing.poll.length %></td>
       <td><%= listing.price %></td>
       <td><%= listing.user.username %></td>
