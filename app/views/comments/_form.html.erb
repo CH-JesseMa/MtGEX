@@ -1,8 +1,6 @@
 <%= form_for([@listing, @listing.comments.build]) do |f| %>
   <p>
-    <%= f.label :My_Name %>
-    <br />
-    <%= f.text_field :commenter %>
+    <INPUT type="text" name="commenter" value="<%= current_user.username %>">
   </p>
   <p>
     <%= f.label :My_Comment %>
