@@ -7,11 +7,10 @@
     <th>Listed</th>
     <th>Card</th>
     <th>Edition</th>
-    <th>Type</th>
-    <th>Condition</th>
-    <th>Average Grade</th>
+    <th>Grade</th>
+    <th>Average</th>
     <th>Graders</th>
-    <th>Grade Differential</th>
+    <th>Differential</th>
     <th>Price</th>
     <th>Listed By</th>
   </tr>
@@ -21,33 +20,36 @@
       <td><img src=" <%= listing.image_front %>" width="50px" alt="<%= listing.card %>"></td>
       <td><img src=" <%= listing.image_back %>" width="50px" alt="<%= listing.card %>"></td>
       <td><%= listing.created_at.strftime("%Y %B %d - %I:%M %p") %></td>
-      <td><strong><%= listing.card %></strong></td>
+      <td>
+        <strong>
+          <%= listing.card %> (<%= listing.card_type %>)
+        </strong>
+      </td>
       <td><%= listing.edition %></td>
-      <td><%= listing.card_type %></td>
       <td>
         <% if listing.condition == 1 %>
-          Near Mint
+          NM
         <% elsif listing.condition == 2 %>
-          Slightly Played
+          SP
         <% elsif listing.condition == 3 %>
-          Moderately Played
+          MP
         <% elsif listing.condition == 4 %>
-          Heavily Played
+          HP
         <% else %>
-          Not Graded
+          N/A
         <% end %>
       </td>
       <td>
         <% if listing.poll.average('response').round == 1 %>
-          Near Mint
+          NM
         <% elsif listing.poll.average('response').round == 2 %>
-          Slightly Played
+          SP
         <% elsif listing.poll.average('response').round == 3 %>
-          Moderately Played
+          MP
         <% elsif listing.poll.average('response').round == 4 %>
-          Heavily Played
+          HP
         <% else %>
-          Not Graded
+          N/A
         <% end %>
       </td>
       <td><%= listing.poll.length %></td>

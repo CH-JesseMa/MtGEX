@@ -8,20 +8,29 @@
   <% end %>
 </p>
 
-<p>
-  <strong>Condition (according to seller):</strong>
+<h2>
   <% if @listing.condition == 1 %>
-    Near Mint
+    [NM]
   <% elsif @listing.condition == 2 %>
-    Slightly Played
+    [SP]
   <% elsif @listing.condition == 3 %>
-    Moderately Played
+    [MP]
   <% elsif @listing.condition == 4 %>
-    Heavily Played
+    [HP]
   <% else %>
-    Not Graded
+    [N/A]
   <% end %>
-</p>
+
+  <%= @listing.card %>
+
+  (<%= @listing.card_type %>)
+
+  from <%= @listing.edition %> Set
+
+  - $<%= @listing.price %>
+</h2>
+Posted by <%= @listing.user.username %>
+  on <%= @listing.created_at.strftime("%B %d, %Y at %I:%M %p") %>
 
 <p>
   <strong>Average Grade Rating (based on <%= @listing.poll.length %> ratings): </strong>
@@ -46,30 +55,6 @@
 <p>
   <img src=" <%= @listing.image_front %>" width="200px" alt="<%= @listing.card %>">
   <img src=" <%= @listing.image_back %>" width="200px" alt="<%= @listing.card %>">
-</p>
-
-<h2><%= @listing.card %></h2>
-<p>
-  <strong>Seller:</strong>
-  <%= @listing.user.username %>
-</p>
-<p>
-  <strong>Listed on:</strong>
-  <%= @listing.created_at.strftime("%B %d, %Y at %I:%M %p") %>
-</p>
-<p>
-  <strong>Edition:</strong>
-  <%= @listing.edition %>
-</p>
-
-<p>
-  <strong>Type:</strong>
-  <%= @listing.card_type %>
-</p>
-
-<p>
-  <strong>Price:</strong>
-  <%= @listing.price %>
 </p>
 
 <p>
