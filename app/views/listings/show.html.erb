@@ -20,15 +20,12 @@
   <% else %>
     [N/A]
   <% end %>
-
   <%= @listing.card %>
-
   (<%= @listing.card_type %>)
-
   from <%= @listing.edition %> Set
-
   - $<%= @listing.price %>
 </h2>
+
 Posted by <%= @listing.user.username %>
   on <%= @listing.created_at.strftime("%B %d, %Y at %I:%M %p") %>
 
