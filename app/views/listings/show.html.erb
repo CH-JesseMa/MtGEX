@@ -25,13 +25,13 @@
 
 <p>
   <strong>Average Grade Rating (based on <%= @listing.poll.length %> ratings): </strong>
-   <% if @listing.poll.sum('response') == 1 %>
+   <% if @listing.poll.average('response').round == 1 %>
     Near Mint
-  <% elsif @listing.poll.sum('response') == 2 %>
+  <% elsif @listing.poll.average('response').round == 2 %>
     Slightly Played
-  <% elsif @listing.poll.sum('response') == 3 %>
+  <% elsif @listing.poll.average('response').round == 3 %>
     Moderately Played
-  <% elsif @listing.poll.sum('response') == 4 %>
+  <% elsif @listing.poll.average('response').round == 4 %>
     Heavily Played
   <% else %>
     Not Graded

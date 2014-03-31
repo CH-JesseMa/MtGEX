@@ -11,6 +11,7 @@
     <th>Condition</th>
     <th>Average Grade</th>
     <th>Graders</th>
+    <th>Grade Differential</th>
     <th>Price</th>
     <th>Listed By</th>
   </tr>
@@ -23,21 +24,40 @@
       <td><strong><%= listing.card %></strong></td>
       <td><%= listing.edition %></td>
       <td><%= listing.card_type %></td>
-      <td><%= listing.condition %></td>
       <td>
-        <% if listing.poll.sum('response') == 0 %>
-          0
+        <% if listing.condition == 1 %>
+          Near Mint
+        <% elsif listing.condition == 2 %>
+          Slightly Played
+        <% elsif listing.condition == 3 %>
+          Moderately Played
+        <% elsif listing.condition == 4 %>
+          Heavily Played
         <% else %>
-          <%= (listing.poll.average('response')).round %>
+          Not Graded
+        <% end %>
+      </td>
+      <td>
+        <% if listing.poll.average('response').round == 1 %>
+          Near Mint
+        <% elsif listing.poll.average('response').round == 2 %>
+          Slightly Played
+        <% elsif listing.poll.average('response').round == 3 %>
+          Moderately Played
+        <% elsif listing.poll.average('response').round == 4 %>
+          Heavily Played
+        <% else %>
+          Not Graded
         <% end %>
       </td>
       <td><%= listing.poll.length %></td>
-      <td><%= listing.price %></td>
+      <td><%= listing.condition - listing.poll.average('response').round %></td>
+      <td>$<%= listing.price %></td>
       <td><%= listing.user.username %></td>
-      <td><%= link_to 'View Listing', listing %></td>
+      <td><%= link_to 'View', listing %></td>
       <td>
         <% if current_user.admin %>
-          <%= link_to '(Edit Listing)', edit_listing_path(listing) %>
+          <%= link_to 'Edit', edit_listing_path(listing) %>
         <% end %>
       </td>
       <td>
