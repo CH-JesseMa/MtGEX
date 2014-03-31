@@ -1,0 +1,10 @@
+<%= form_for([@listing, @listing.polls.build]) do |f| %>
+  <p>
+    <%= f.label :response %>
+    <br>
+    <%= f.select(:response, options_for_select([['Near Mint', 'Near Mint'], ['Slightly Played', 'Slightly Played'], ['Moderately Played', 'Moderately Played'], ['Heavily Played', 'Heavily Played']], 1)) %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
