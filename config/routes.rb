@@ -11,6 +11,7 @@ Mtgex::Application.routes.draw do
   resources :users
   resources :listings do
     resources :comments
+    resources :polls
   end
 
   # session routes

@@ -1,4 +1,4 @@
-class ChangePriceToInt < ActiveRecord::Migration
+class ChangeTitleInPollsTable < ActiveRecord::Migration
   def change
     change_table :polls do |t|
       t.rename :title, :condition
