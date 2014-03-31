@@ -15,6 +15,7 @@ class ListingsController < ApplicationController
 
   def show
     @listing = Listing.find(params[:id])
+    binding.pry
   end
 
   def index

@@ -8,6 +8,46 @@
   <% end %>
 </p>
 
+<p>
+  <strong>Condition (according to seller):</strong>
+  <% if @listing.condition == 1 %>
+    Near Mint
+  <% elsif @listing.condition == 2 %>
+    Slightly Played
+  <% elsif @listing.condition == 3 %>
+    Moderately Played
+  <% elsif @listing.condition == 4 %>
+    Heavily Played
+  <% else %>
+    Not Graded
+  <% end %>
+</p>
+
+<p>
+  <strong>Average Grade Rating (based on <%= @listing.poll.length %> ratings): </strong>
+   <% if @listing.poll.sum('response') == 1 %>
+    Near Mint
+  <% elsif @listing.poll.sum('response') == 2 %>
+    Slightly Played
+  <% elsif @listing.poll.sum('response') == 3 %>
+    Moderately Played
+  <% elsif @listing.poll.sum('response') == 4 %>
+    Heavily Played
+  <% else %>
+    Not Graded
+  <% end %>
+</p>
+
+<p>
+<strong>Grade card:</strong>
+<%= render "polls/form" %>
+</p>
+
+<p>
+  <img src=" <%= @listing.image_front %>" width="200px" alt="<%= @listing.card %>">
+  <img src=" <%= @listing.image_back %>" width="200px" alt="<%= @listing.card %>">
+</p>
+
 <h2><%= @listing.card %></h2>
 <p>
   <strong>Seller:</strong>
@@ -37,33 +77,9 @@
   <%= @listing.description %>
 </p>
 
-<p>
-  <strong>Condition (according to seller):</strong>
-  <%= @listing.condition %>
-</p>
-
-<p>
-  <strong>Average Grade Rating (based on <%= @listing.poll.length %> ratings): </strong>
-  <% if @listing.poll.sum('response') == 0 %>
-    0
-  <% else %>
-    <%= (@listing.poll.average('response')).round %>
-  <% end %>
-</p>
-
-<p>
-<strong>Grade card:</strong>
-<%= render "polls/form" %>
-</p>
-
-<p>
-  <img src=" <%= @listing.image_front %>" width="200px" alt="<%= @listing.card %>">
-  <img src=" <%= @listing.image_back %>" width="200px" alt="<%= @listing.card %>">
-</p>
-
-<h2>Comments</h2>
+<h4>Comments</h4>
 <%= render @listing.comments %>
 
-<h2>Add a comment:</h2>
+<h4>Add a comment:</h4>
 <%= render "comments/form" %>
 
