@@ -30,6 +30,11 @@ Posted by <%= @listing.user.username %>
   on <%= @listing.created_at.strftime("%B %d, %Y at %I:%M %p") %>
 
 <p>
+  <strong>Description:</strong>
+  <%= @listing.description %>
+</p>
+
+<p>
   <strong>Average Grade Rating (based on <%= @listing.poll.length %> ratings): </strong>
    <% if @listing.poll.average('response').round == 1 %>
     Near Mint
@@ -52,11 +57,6 @@ Posted by <%= @listing.user.username %>
 <p>
   <img src=" <%= @listing.image_front %>" width="200px" alt="<%= @listing.card %>">
   <img src=" <%= @listing.image_back %>" width="200px" alt="<%= @listing.card %>">
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @listing.description %>
 </p>
 
 <h4>Comments</h4>
