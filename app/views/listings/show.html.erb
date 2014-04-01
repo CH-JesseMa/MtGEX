@@ -103,36 +103,6 @@
               </td>
             </th>
         </table>
-        <table>
-            <th>
-              <td>
-                <% if @listing.status == true %>
-                  <h4>Add a comment</h4>
-                <% end %>
-              </td>
-              <td>
-                <% if @listing.status == true %>
-                  <%= render "comments/form" %>
-                <% end %>
-              </td>
-            </th>
-        </table>
-        <table>
-          <th>
-            <td>
-              <% if @listing.comments.length > 0 %>
-                <h1>Comments</h1>
-              <% end %>
-            </td>
-          </th>
-        </table>
-        <table>
-          <tr>
-            <td>
-              <%= render @listing.comments %>
-            </td>
-          </tr>
-        </table>
       </td>
       <td>
         <% if @listing.status == false %>
