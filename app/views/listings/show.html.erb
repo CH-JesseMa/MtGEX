@@ -46,7 +46,7 @@
           <tr>
             <td>
               <strong>
-                Average Grade Rating (based on <%= @listing.poll.length %> ratings):
+                Average Grade Rating (<%= pluralize(@listing.poll.length, "rating") %>):
               </strong>
               <% if @listing.poll.length == 0 %>
                 Not Graded
@@ -88,7 +88,6 @@
             </td>
           </tr>
         </table>
-
         <table>
             <th>
               <td>
@@ -120,7 +119,50 @@
             <p>
               <%= render "comments/form" %>
             </p>
-
+            <table>
+              <tr>
+                <td>
+                  <% if current_user.id == @listing.buyer %>
+                    <%= form_for(@listing) do |f| %>
+                      <%= f.hidden_field(:buyer_confirm, value: true ) %>
+                      <%= f.submit("Finalize") %>
+                    <% end %>
+                  <% end %>
+                  <% if current_user == @listing.user %>
+                    <%= form_for(@listing) do |f| %>
+                      <%= f.hidden_field(:seller_confirm, value: true ) %>
+                      <%= f.submit("Finalize") %>
+                    <% end %>
+                  <% end %>
+                  <% if current_user.admin %>
+                    <%= form_for(@listing) do |f| %>
+                      <%= f.hidden_field(:admin_confirm, value: true ) %>
+                    <%= f.submit("Finalize") %>
+                    <% end %>
+                  <% end %>
+                </td>
+                <td>
+                  <% if current_user.id == @listing.buyer %>
+                    <%= form_for(@listing) do |f| %>
+                      <%= f.hidden_field(:status, value: true ) %>
+                      <%= f.submit("Cancel Purchase") %>
+                    <% end %>
+                  <% end %>
+                  <% if current_user == @listing.user %>
+                    <%= form_for(@listing) do |f| %>
+                      <%= f.hidden_field(:status, value: true ) %>
+                      <%= f.submit("Cancel Purchase") %>
+                    <% end %>
+                  <% end %>
+                  <% if current_user.admin %>
+                    <%= form_for(@listing) do |f| %>
+                      <%= f.hidden_field(:status, value: true ) %>
+                      <%= f.submit("Cancel Purchase") %>
+                    <% end %>
+                  <% end %>
+                </td>
+              </tr>
+            </table>
           <% end %>
         <% end %>
       </td>
