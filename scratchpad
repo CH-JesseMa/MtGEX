@@ -1,0 +1,33 @@
+        <% if current_user.id == @listing.buyer %>
+              <%= form_for(@purchase) do |f| %>
+                <%= f.hidden_field(:buyer_status, value: true ) %>
+                <%= f.submit("Finalize") %>
+              <% end %>
+              <%= form_for(@listing) do |f| %>
+                <%= f.hidden_field(:status, value: true ) %>
+                <%= f.submit("Cancel Purchase") %>
+              <% end %>
+            <% end %>
+
+            <% if current_user == @listing.user %>
+              <%= form_for(@purchase) do |f| %>
+                <%= f.hidden_field(:seller_status, value: true ) %>
+                <%= f.submit("Finalize") %>
+              <% end %>
+              <%= form_for(@listing) do |f| %>
+                <%= f.hidden_field(:status, value: true ) %>
+                <%= f.submit("Cancel Purchase") %>
+              <% end %>
+            <% end %>
+
+            <% if current_user.admin %>
+              <%= form_for(@purchase) do |f| %>
+                <%= f.hidden_field(:status, value: true ) %>
+              <%= f.submit("Finalize") %>
+              <% end %>
+
+              <%= form_for(@listing) do |f| %>
+                <%= f.hidden_field(:status, value: true ) %>
+                <%= f.submit("Cancel Purchase") %>
+              <% end %>
+            <% end %>
