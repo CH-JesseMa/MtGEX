@@ -1,0 +1,9 @@
+<p>
+  <strong><%= purchase.user.username %> said:</strong> '<%= purchase.body %>'
+
+  <% if current_user.admin %>
+    <%= link_to 'Delete', [purchase.listing, purchase],
+       method: :delete,
+       data: { confirm: 'Are you sure?' } %>
+  <% end %>
+</p>

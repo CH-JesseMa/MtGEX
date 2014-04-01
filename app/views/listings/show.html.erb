@@ -1,139 +1,136 @@
-<% if logged_in? == false %>
-<% else %>
-  <p>
-    <% if @listing.status == true %>
-      <% if current_user.admin || current_user == @listing.user %>
-        <%= link_to 'Edit Listing', edit_listing_path(@listing) %>
-      <% end %>
-    <% else %>
-    <% end %>
+<% if logged_in? == true %>
 
-    <% if current_user.admin %>
-      <%= link_to 'Delete', listing_path(@listing),
-        method: :delete, data: { confirm: 'Are you sure?' } %>
-    <% end %>
-  </p>
+    <table>
+      <tr>
+        <td>
+          <h2>
+            <% if @listing.condition == 1 %>
+              NM
+            <% elsif @listing.condition == 2 %>
+              SP
+            <% elsif @listing.condition == 3 %>
+              MP
+            <% elsif @listing.condition == 4 %>
+              HP
+            <% else %>
+              N/A
+            <% end %>
+              <%= @listing.card %>
+              (<%= @listing.card_type %>)
+              [<%= @listing.edition %>]
+              - $<%= @listing.price %>
+            <% if @listing.status == true %>
+              <% if current_user.admin || current_user == @listing.user %>
+                <%= link_to 'Edit Listing', edit_listing_path(@listing) %>
+              <% end %>
+            <% else %>
+            <% end %>
 
-  <table>
-    <tr>
-      <td>
-        <h2>
-          <% if @listing.condition == 1 %>
-            NM
-          <% elsif @listing.condition == 2 %>
-            SP
-          <% elsif @listing.condition == 3 %>
-            MP
-          <% elsif @listing.condition == 4 %>
-            HP
+            <% if current_user.admin %>
+              <%= link_to 'Delete', listing_path(@listing),
+                method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% end %>
+          </h2>
+        </td>
+        <td>
+          <% if @listing.status == true && current_user != @listing.user %>
+            <%= form_for(@listing) do |f| %>
+              <%= f.hidden_field(:status, value: false ) %>
+              <%= f.hidden_field(:buyer, value: current_user.id) %>
+              <%= f.submit("Purchase Card") %>
+            <% end %>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <strong>
+            Average Grade Rating (based on <%= @listing.poll.length %> ratings):
+          </strong>
+          <% if @listing.poll.length == 0 %>
+            Not Graded
+          <% elsif @listing.poll.average('response').round == 1 %>
+            Near Mint
+          <% elsif @listing.poll.average('response').round == 2 %>
+            Slightly Played
+          <% elsif @listing.poll.average('response').round == 3 %>
+            Moderately Played
+          <% elsif @listing.poll.average('response').round == 4 %>
+            Heavily Played
           <% else %>
-            N/A
+            Not Graded
           <% end %>
-            <%= @listing.card %>
-            (<%= @listing.card_type %>)
-            [<%= @listing.edition %>]
-            - $<%= @listing.price %>
-        </h2>
-      </td>
-      <td>
-        <% if @listing.status == true && current_user != @listing.user %>
-          <%= form_for(@listing) do |f| %>
-            <%= f.hidden_field(:status, value: false ) %>
-            <%= f.hidden_field(:buyer, value: current_user.id) %>
-            <%= f.submit("Purchase Card") %>
+          (Differential:
+          <% if @listing.poll.length == 0 %>
+            0)
+          <% else %>
+            <%= @listing.condition - @listing.poll.average('response').round %>)
           <% end %>
-        <% end %>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <strong>
-          Average Grade Rating (based on <%= @listing.poll.length %> ratings):
-        </strong>
-        <% if @listing.poll.length == 0 %>
-          Not Graded
-        <% elsif @listing.poll.average('response').round == 1 %>
-          Near Mint
-        <% elsif @listing.poll.average('response').round == 2 %>
-          Slightly Played
-        <% elsif @listing.poll.average('response').round == 3 %>
-          Moderately Played
-        <% elsif @listing.poll.average('response').round == 4 %>
-          Heavily Played
-        <% else %>
-          Not Graded
-        <% end %>
-        (Differential:
-        <% if @listing.poll.length == 0 %>
-          0)
-        <% else %>
-          <%= @listing.condition - @listing.poll.average('response').round %>)
-        <% end %>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <strong>Details:</strong>
-        Posted by <%= @listing.user.username %> on <%= @listing.created_at.strftime("%B %d, %Y at %I:%M %p") %>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <strong>Description:</strong>
-        <%= @listing.description %>
-      </td>
-    </tr>
-    <tr>
-      <td>
-      <img src=" <%= @listing.image_front %>" width="200px" alt="<%= @listing.card %>">
-      <img src=" <%= @listing.image_back %>" width="200px" alt="<%= @listing.card %>">
-      </td>
-    </tr>
-  </table>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <strong>Details:</strong>
+          Posted by <%= @listing.user.username %> on <%= @listing.created_at.strftime("%B %d, %Y at %I:%M %p") %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <strong>Description:</strong>
+          <%= @listing.description %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+        <img src=" <%= @listing.image_front %>" width="200px" alt="<%= @listing.card %>">
+        <img src=" <%= @listing.image_back %>" width="200px" alt="<%= @listing.card %>">
+        </td>
+      </tr>
+    </table>
 
-  <table>
+    <table>
+        <th>
+          <td>
+            <% if @listing.status == true %>
+              <strong>Grade card:</strong>
+            <% end %>
+          </td>
+          <td>
+            <% if @listing.status == true %>
+              <%= render "polls/form" %>
+            <% end %>
+          </td>
+        </th>
+    </table>
+    <table>
+        <th>
+          <td>
+            <% if @listing.status == true %>
+              <h4>Add a comment</h4>
+            <% end %>
+          </td>
+          <td>
+            <% if @listing.status == true %>
+              <%= render "comments/form" %>
+            <% end %>
+          </td>
+        </th>
+    </table>
+    <table>
       <th>
         <td>
-          <% if @listing.status == true %>
-            <strong>Grade card:</strong>
-          <% end %>
-        </td>
-        <td>
-          <% if @listing.status == true %>
-            <%= render "polls/form" %>
+          <% if @listing.comments.length > 0 %>
+            <h1>Comments</h1>
           <% end %>
         </td>
       </th>
-  </table>
-  <table>
-      <th>
+    </table>
+    <table>
+      <tr>
         <td>
-          <% if @listing.status == true %>
-            <h4>Add a comment</h4>
-          <% end %>
+          <%= render @listing.comments %>
         </td>
-        <td>
-          <% if @listing.status == true %>
-            <%= render "comments/form" %>
-          <% end %>
-        </td>
-      </th>
-  </table>
-  <table>
-    <th>
-      <td>
-        <% if @listing.comments.length > 0 %>
-          <h1>Comments</h1>
-        <% end %>
-      </td>
-    </th>
-  </table>
-  <table>
-    <tr>
-      <td>
-        <%= render @listing.comments %>
-      </td>
-    </tr>
-  </table>
+      </tr>
+    </table>
 
 <% end %>

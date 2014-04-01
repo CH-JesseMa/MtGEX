@@ -7,7 +7,6 @@ class PurchasesController < ApplicationController
     redirect_to listing_path(@listing)
   end
 
-
 private
 
   def purchase_params
@@ -18,6 +17,7 @@ private
       :listing_id,
       :status,
       :buyer_status,
-      :seller_status)
+      :seller_status,
+      :buyer)
   end
 end
