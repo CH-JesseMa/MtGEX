@@ -14,31 +14,38 @@
     <% end %>
   </p>
 
-  <h2>
-    <% if @listing.condition == 1 %>
-      NM
-    <% elsif @listing.condition == 2 %>
-      SP
-    <% elsif @listing.condition == 3 %>
-      MP
-    <% elsif @listing.condition == 4 %>
-      HP
-    <% else %>
-      N/A
-    <% end %>
-    <%= @listing.card %>
-    (<%= @listing.card_type %>)
-    [<%= @listing.edition %>]
-    - $<%= @listing.price %>
-  </h2>
-
-  Posted by <%= @listing.user.username %>
-    on <%= @listing.created_at.strftime("%B %d, %Y at %I:%M %p") %>
-
-  <p>
-    <strong>Description:</strong>
-    <%= @listing.description %>
-  </p>
+  <table>
+      <tr>
+        <th>
+          <h2>
+            <% if @listing.condition == 1 %>
+              NM
+            <% elsif @listing.condition == 2 %>
+              SP
+            <% elsif @listing.condition == 3 %>
+              MP
+            <% elsif @listing.condition == 4 %>
+              HP
+            <% else %>
+              N/A
+            <% end %>
+              <%= @listing.card %>
+              (<%= @listing.card_type %>)
+              [<%= @listing.edition %>]
+              - $<%= @listing.price %>
+          </h2>
+        </th>
+        <th>
+          <% if @listing.status == true && current_user != @listing.user %>
+            <%= form_for(@listing) do |f| %>
+              <%= f.hidden_field(:status, value: false ) %>
+              <%= f.hidden_field(:buyer, value: current_user.id) %>
+              <%= f.submit("Purchase Card") %>
+            <% end %>
+          <% end %>
+        </th>
+      </tr>
+  </table>
 
   <p>
     <strong>
@@ -65,19 +72,26 @@
       <% end %>
   </p>
 
-  <% if @listing.status == true %>
-    <p>
-      <strong>Grade card:</strong>
-      <%= render "polls/form" %>
-    </p>
-  <% end %>
+  <p>
+    <strong>Details:</strong>
+    Posted by <%= @listing.user.username %> on <%= @listing.created_at.strftime("%B %d, %Y at %I:%M %p") %>
+  </p>
+  <p>
+    <strong>Description:</strong>
+    <%= @listing.description %>
+  </p>
 
-   <% if @listing.status == true %>
-      <%= form_for(@listing) do |f| %>
-        <%= f.hidden_field(:status, value: false ) %>
-        <%= f.hidden_field(:buyer, value: current_user.id) %>
-        <%= f.submit("Purchase Card") %>
-      <% end %>
+  <% if @listing.status == true %>
+    <table>
+      <tr>
+        <th>
+          <strong>Grade card:</strong>
+        </th>
+        <th>
+          <%= render "polls/form" %>
+        </th>
+      </tr>
+    </table>
   <% end %>
 
   <p>
@@ -96,5 +110,4 @@
     <%= render "comments/form" %>
   <% else %>
   <% end %>
-
 <% end %>
