@@ -1,1 +1,8 @@
-_form.html.erb
+<% if logged_in? %>
+  <%= form_for [@listing, Purchase.new] do |f| %>
+    <%= f.hidden_field :user_id, :value =>current_user.id %>
+    <%= f.hidden_field :listing_id, :value => @listing.id %>
+    <%= f.text_field :body %>
+    <%= f.submit 'Add Purchase Details' %>
+  <% end %>
+<% end %>

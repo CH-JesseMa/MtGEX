@@ -1,9 +1,5 @@
 class PurchasesController < ApplicationController
 
-  def new
-    @purchase = Purchase.new
-  end
-
   def create
     @listing = Listing.find_by(id: purchase_params[:listing_id] )
     @purchase = Purchase.new(purchase_params)
@@ -11,16 +7,17 @@ class PurchasesController < ApplicationController
     redirect_to listing_path(@listing)
   end
 
-  def show
-
-  end
 
 private
 
   def purchase_params
     params.require(:purchase).permit(
       :id,
+      :body
       :user_id,
-      :listing_id)
+      :listing_id,
+      :status,
+      :buyer_status,
+      :seller_status)
   end
 end
