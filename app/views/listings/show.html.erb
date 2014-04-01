@@ -122,22 +122,10 @@
             <table>
               <tr>
                 <td>
-                  <% if current_user.id == @listing.buyer %>
+                  <% if current_user.admin && @listing.buyer_amount == @listing.seller_amount %>
                     <%= form_for(@listing) do |f| %>
-                      <%= f.hidden_field(:buyer_confirm, value: true ) %>
-                      <%= f.submit("Finalize") %>
-                    <% end %>
-                  <% end %>
-                  <% if current_user == @listing.user %>
-                    <%= form_for(@listing) do |f| %>
-                      <%= f.hidden_field(:seller_confirm, value: true ) %>
-                      <%= f.submit("Finalize") %>
-                    <% end %>
-                  <% end %>
-                  <% if current_user.admin %>
-                    <%= form_for(@listing) do |f| %>
-                      <%= f.hidden_field(:admin_confirm, value: true ) %>
-                    <%= f.submit("Finalize") %>
+                      <%= f.text_field :total_amount %>
+                      <%= f.submit("Confirm Total Price") %>
                     <% end %>
                   <% end %>
                 </td>
