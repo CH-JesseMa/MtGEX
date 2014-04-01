@@ -21,6 +21,7 @@ class Listing < ActiveRecord::Base
   belongs_to :user
   has_many :comments, dependent: :destroy
   has_many :poll, dependent: :destroy
+  has_one :purchase
   validates :card, presence: true
   validates :edition, presence: true
   validates :price, presence: true
