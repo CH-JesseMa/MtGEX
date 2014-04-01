@@ -47,12 +47,15 @@
           <% else %>
             <strong>
               <%= listing.card %> (<%= listing.card_type %>)
-              <% if current_user.admin %>
-                 <%= link_to 'View', listing_path(listing) %>
-                 <%= link_to 'Edit', edit_listing_path(listing) %>
-                 <%= link_to 'Delete', listing_path(listing), method: :delete, data: { confirm: 'Are you sure?' } %>
-              <% else %>
-              <% end %>
+                <% if current_user == listing.user || current_user.id == listing.buyer %>
+                  <%= link_to 'View', listing_path(listing) %>
+                <% end %>
+
+                <% if current_user.admin %>
+                  <%= link_to 'View', listing_path(listing) %>
+                  <%= link_to 'Edit', edit_listing_path(listing) %>
+                  <%= link_to 'Delete', listing_path(listing), method: :delete, data: { confirm: 'Are you sure?' } %>
+                <% end %>
             </strong>
           <% end %>
         </td>
