@@ -39,11 +39,8 @@
               <strong>
                 <%= listing.card %> (<%= listing.card_type %>)
                 <% if current_user.admin %>
-                   <%= link_to 'View', listing_path(listing) %>
                    <%= link_to 'Edit', edit_listing_path(listing) %>
-                   <%= link_to 'Delete', listing_path(listing),
-                      method: :delete, data: { confirm: 'Are you sure?' } %>
-                <% else %>
+                   <%= link_to 'Delete', listing_path(listing), method: :delete, data: { confirm: 'Are you sure?' } %>
                 <% end %>
               </strong>
             <% end %>
@@ -51,9 +48,9 @@
             <strong>
               <%= listing.card %> (<%= listing.card_type %>)
               <% if current_user.admin %>
+                 <%= link_to 'View', listing_path(listing) %>
                  <%= link_to 'Edit', edit_listing_path(listing) %>
-                 <%= link_to 'Delete', listing_path(listing),
-                    method: :delete, data: { confirm: 'Are you sure?' } %>
+                 <%= link_to 'Delete', listing_path(listing), method: :delete, data: { confirm: 'Are you sure?' } %>
               <% else %>
               <% end %>
             </strong>
