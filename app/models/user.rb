@@ -21,4 +21,5 @@ class User < ActiveRecord::Base
   has_many :listings
   has_many :comments
   has_many :polls
+  has_many :purchases
 end

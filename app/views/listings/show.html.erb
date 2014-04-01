@@ -22,13 +22,7 @@
   <% end %>
   <%= @listing.card %>
   (<%= @listing.card_type %>)
-<<<<<<< HEAD
-
   [<%= @listing.edition %>]
-
-=======
-  from <%= @listing.edition %> Set
->>>>>>> PurchaseFlow
   - $<%= @listing.price %>
 </h2>
 
@@ -41,7 +35,9 @@ Posted by <%= @listing.user.username %>
 </p>
 
 <p>
-  <strong>Average Grade Rating (based on <%= @listing.poll.length %> ratings): </strong>
+  <strong>
+    Average Grade Rating (based on <%= @listing.poll.length %> ratings):
+  </strong>
    <% if @listing.poll.average('response').round == 1 %>
     Near Mint
   <% elsif @listing.poll.average('response').round == 2 %>
@@ -53,6 +49,7 @@ Posted by <%= @listing.user.username %>
   <% else %>
     Not Graded
   <% end %>
+  (Differential: <%= @listing.condition - @listing.poll.average('response').round %>)
 </p>
 
 <p>

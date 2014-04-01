@@ -33,9 +33,17 @@
       </td>
       <td><%= listing.created_at.strftime("%B %d, %Y") %></td>
       <td>
-        <strong>
-          <%= listing.card %> (<%= listing.card_type %>)
-        </strong>
+        <%= link_to listing do %>
+          <strong>
+            <%= listing.card %> (<%= listing.card_type %>)
+            <% if current_user.admin %>
+               <%= link_to 'Edit', edit_listing_path(listing) %>
+               <%= link_to 'Delete', listing_path(listing),
+                  method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% else %>
+            <% end %>
+          </strong>
+        <% end %>
       </td>
       <td>
         <%= listing.edition %>
@@ -66,21 +74,17 @@
           N/A
         <% end %>
       </td>
-      <td><%= listing.poll.length %></td>
-      <td><%= listing.condition - listing.poll.average('response').round %></td>
-      <td>$<%= listing.price %></td>
-      <td><%= listing.user.username %></td>
-      <td><%= link_to 'View', listing %></td>
       <td>
-        <% if current_user.admin %>
-          <%= link_to 'Edit', edit_listing_path(listing) %>
-        <% end %>
+        <%= listing.poll.length %>
       </td>
       <td>
-        <% if current_user.admin %>
-          <%= link_to 'Delete', listing_path(listing),
-            method: :delete, data: { confirm: 'Are you sure?' } %>
-        <% end %>
+        <%= listing.condition - listing.poll.average('response').round %>
+      </td>
+      <td>
+        $<%= listing.price %>
+      </td>
+      <td>
+        <%= listing.user.username %>
       </td>
     </tr>
   <% end %>
