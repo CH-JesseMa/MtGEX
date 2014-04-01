@@ -1,7 +1,7 @@
 <p>
   <strong><%= comment.user.username %> said:</strong> '<%= comment.body %>'
 
-  <% if current_user.admin or current_user.id == comment.user.id %>
+  <% if current_user.admin %>
     <%= link_to 'Delete Comment', [comment.listing, comment],
        method: :delete,
        data: { confirm: 'Are you sure?' } %>
