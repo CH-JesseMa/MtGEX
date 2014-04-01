@@ -10,22 +10,22 @@
 
 <h2>
   <% if @listing.condition == 1 %>
-    [NM]
+    NM
   <% elsif @listing.condition == 2 %>
-    [SP]
+    SP
   <% elsif @listing.condition == 3 %>
-    [MP]
+    MP
   <% elsif @listing.condition == 4 %>
-    [HP]
+    HP
   <% else %>
-    [N/A]
+    N/A
   <% end %>
 
   <%= @listing.card %>
 
   (<%= @listing.card_type %>)
 
-  from <%= @listing.edition %> Set
+  [<%= @listing.edition %>]
 
   - $<%= @listing.price %>
 </h2>

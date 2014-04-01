@@ -4,6 +4,7 @@
   <tr>
     <th>Front</th>
     <th>Back</th>
+    <th>Status</th>
     <th>Listed</th>
     <th>Card</th>
     <th>Edition</th>
@@ -17,15 +18,28 @@
 
   <% @listings.each do |listing| %>
     <tr>
-      <td><img src=" <%= listing.image_front %>" width="50px" alt="<%= listing.card %>"></td>
-      <td><img src=" <%= listing.image_back %>" width="50px" alt="<%= listing.card %>"></td>
-      <td><%= listing.created_at.strftime("%Y %B %d - %I:%M %p") %></td>
+      <td>
+        <img src=" <%= listing.image_front %>" width="50px" alt="<%= listing.card %>">
+      </td>
+      <td>
+        <img src=" <%= listing.image_back %>" width="50px" alt="<%= listing.card %>">
+      </td>
+      <td>
+        <% if listing.status == true %>
+          Active
+        <% else %>
+          Closed
+        <% end %>
+      </td>
+      <td><%= listing.created_at.strftime("%B %d, %Y") %></td>
       <td>
         <strong>
           <%= listing.card %> (<%= listing.card_type %>)
         </strong>
       </td>
-      <td><%= listing.edition %></td>
+      <td>
+        <%= listing.edition %>
+      </td>
       <td>
         <% if listing.condition == 1 %>
           NM
