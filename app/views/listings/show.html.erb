@@ -148,14 +148,14 @@
               Do not click finalize until you are ready. Do not ship the item until the Admin has confirmed receipt of funds.
             </p>
 
-            <% if @listing.purchases.length > 0 %>
+            <% if @listing.purchasedetails.length > 0 %>
               <h1>Purchase Discussion</h1>
             <% end %>
 
-            <%= render @listing.purchases %>
+            <%= render @listing.purchasedetails %>
 
             <% if @listing.purchase.status == false %>
-              <%= render "purchases/form" %>
+              <%= render "purchases_details/form" %>
             <% end %>
 
             <% if current_user.id == @listing.buyer %>
@@ -181,7 +181,12 @@
             <% end %>
 
             <% if current_user.admin %>
-             <%= form_for(@listing) do |f| %>
+              <%= form_for(@purchase) do |f| %>
+                <%= f.hidden_field(:status, value: true ) %>
+              <%= f.submit("Finalize") %>
+              <% end %>
+
+              <%= form_for(@listing) do |f| %>
                 <%= f.hidden_field(:status, value: true ) %>
                 <%= f.submit("Cancel Purchase") %>
               <% end %>

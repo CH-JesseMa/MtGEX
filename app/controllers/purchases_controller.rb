@@ -12,7 +12,6 @@ private
   def purchase_params
     params.require(:purchase).permit(
       :id,
-      :body
       :user_id,
       :listing_id,
       :status,

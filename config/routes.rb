@@ -13,6 +13,8 @@ Mtgex::Application.routes.draw do
     resources :comments
     resources :polls
     resources :purchases
+    resources :purchasedetails
+
   end
 
   # session routes
