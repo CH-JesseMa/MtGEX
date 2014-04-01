@@ -1,15 +1,11 @@
 <% if logged_in? %>
 
-  <p>Hi, <%= current_user.username %>!</p>
+  <p>Hello and welcome, <%= current_user.username %>!</p>
 
   <p>
     <a href="/logout"> Logout</a>
   </p>
 
 <% else %>
-
-  <p>
-    Welcome to MtGEX, the Magic the Gathering Exchange
-  </p>
 
 <% end %>

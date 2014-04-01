@@ -7,23 +7,31 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<h1>MtGEX</h1>
-  <% if logged_in? %>
+    <% if logged_in? %>
+      <h2>
+        MtGEX: the Magic the Gathering Exchange
+      </h2>
 
-    <p>
-      <%= link_to 'All Listings', listings_path %>
-      <%= link_to 'List a New Card', new_listing_path %>
-      <%= link_to 'Logout', logout_path %>
-    </p>
+      <p>
+        <%= link_to 'All Listings', listings_path %>
+        <%= link_to 'List a New Card', new_listing_path %>
+        <%= link_to 'Logout', logout_path %>
+      </p>
 
-  <% else %>
+    <% else %>
 
-    <p>
-      <%= link_to 'Register My Account', new_user_path %>
-      <%= link_to 'Login', session_new_path %>
-    </p>
-  <% end %>
-<%= yield %>
+      <p>
+        <%= link_to 'Register My Account', new_user_path %>
+        <%= link_to 'Login', session_new_path %>
+      </p>
+      <h3>
+        Hello and welcome to MtGEX: the Magic the Gathering Exchange.
+      </h3>
+      <p>
+        Join MtGEX and gain exclusive access to private collections of cards for sale. You can be confident of the condition of the cards you purchase, because they will be graded by our community of collectors and players!
+      </p>
+    <% end %>
+  <%= yield %>
 
 </body>
 </html>

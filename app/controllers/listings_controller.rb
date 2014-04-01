@@ -40,7 +40,8 @@ class ListingsController < ApplicationController
       :price,
       :description,
       :image_front,
-      :image_back))
+      :image_back,
+      :buyer))
       redirect_to @listing
     else
       render 'edit'
@@ -66,6 +67,7 @@ private
       :price,
       :description,
       :image_front,
-      :image_back)
+      :image_back,
+      :buyer)
   end
 end
