@@ -1,3 +1,7 @@
-<h1>Edit My Listing</h1>
+<% if logged_in? == false %>
+<% elsif current_user.admin || current_user == @listing.user %>
+  <h1>Edit My Listing</h1>
+  <%= render 'form' %>
+<% else %>
 
-<%= render 'form' %>
+<% end %>

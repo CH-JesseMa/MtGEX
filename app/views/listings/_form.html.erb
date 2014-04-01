@@ -12,6 +12,12 @@
   <% end %>
 
   <p>
+    <%= f.label :status %>
+    <br>
+    <%= f.select(:status, options_for_select([['Active', true], ['Closed', false]], 1)) %>
+  </p>
+
+  <p>
     <%= f.label :card %>
     <br>
     <%= f.text_field :card %>

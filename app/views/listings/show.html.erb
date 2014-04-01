@@ -1,70 +1,91 @@
-<p>
-  <% if current_user.admin || current_user == @listing.user %>
-    <%= link_to 'Edit Listing', edit_listing_path(@listing) %>
-  <% end %>
-  <% if current_user.admin %>
-    <%= link_to 'Delete', listing_path(@listing),
-      method: :delete, data: { confirm: 'Are you sure?' } %>
-  <% end %>
-</p>
+<% if logged_in? == false %>
+<% else %>
+  <p>
+    <% if @listing.status == true %>
+      <% if current_user.admin || current_user == @listing.user %>
+        <%= link_to 'Edit Listing', edit_listing_path(@listing) %>
+      <% end %>
+    <% else %>
+    <% end %>
 
-<h2>
-  <% if @listing.condition == 1 %>
-    NM
-  <% elsif @listing.condition == 2 %>
-    SP
-  <% elsif @listing.condition == 3 %>
-    MP
-  <% elsif @listing.condition == 4 %>
-    HP
+    <% if current_user.admin %>
+      <%= link_to 'Delete', listing_path(@listing),
+        method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% end %>
+  </p>
+
+  <h2>
+    <% if @listing.condition == 1 %>
+      NM
+    <% elsif @listing.condition == 2 %>
+      SP
+    <% elsif @listing.condition == 3 %>
+      MP
+    <% elsif @listing.condition == 4 %>
+      HP
+    <% else %>
+      N/A
+    <% end %>
+    <%= @listing.card %>
+    (<%= @listing.card_type %>)
+    [<%= @listing.edition %>]
+    - $<%= @listing.price %>
+  </h2>
+
+  Posted by <%= @listing.user.username %>
+    on <%= @listing.created_at.strftime("%B %d, %Y at %I:%M %p") %>
+
+  <p>
+    <strong>Description:</strong>
+    <%= @listing.description %>
+  </p>
+
+  <p>
+    <strong>
+      Average Grade Rating (based on <%= @listing.poll.length %> ratings):
+    </strong>
+      <% if @listing.poll.length == 0 %>
+        Not Graded
+      <% elsif @listing.poll.average('response').round == 1 %>
+        Near Mint
+      <% elsif @listing.poll.average('response').round == 2 %>
+        Slightly Played
+      <% elsif @listing.poll.average('response').round == 3 %>
+        Moderately Played
+      <% elsif @listing.poll.average('response').round == 4 %>
+        Heavily Played
+      <% else %>
+        Not Graded
+      <% end %>
+    (Differential:
+      <% if @listing.poll.length == 0 %>
+        (0)
+      <% else %>
+        (<%= @listing.condition - @listing.poll.average('response').round %>)
+      <% end %>
+  </p>
+
+  <% if @listing.status == true %>
+    <p>
+      <strong>Grade card:</strong>
+      <%= render "polls/form" %>
+    </p>
   <% else %>
-    N/A
   <% end %>
-  <%= @listing.card %>
-  (<%= @listing.card_type %>)
-  [<%= @listing.edition %>]
-  - $<%= @listing.price %>
-</h2>
 
-Posted by <%= @listing.user.username %>
-  on <%= @listing.created_at.strftime("%B %d, %Y at %I:%M %p") %>
+  <p>
+    <img src=" <%= @listing.image_front %>" width="200px" alt="<%= @listing.card %>">
+    <img src=" <%= @listing.image_back %>" width="200px" alt="<%= @listing.card %>">
+  </p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @listing.description %>
-</p>
+  <h4>Comments</h4>
+  <%= render @listing.comments %>
 
-<p>
-  <strong>
-    Average Grade Rating (based on <%= @listing.poll.length %> ratings):
-  </strong>
-   <% if @listing.poll.average('response').round == 1 %>
-    Near Mint
-  <% elsif @listing.poll.average('response').round == 2 %>
-    Slightly Played
-  <% elsif @listing.poll.average('response').round == 3 %>
-    Moderately Played
-  <% elsif @listing.poll.average('response').round == 4 %>
-    Heavily Played
+
+  <% if @listing.status == true %>
+    <h4>Add a comment:</h4>
+    <%= render "comments/form" %>
   <% else %>
-    Not Graded
   <% end %>
-  (Differential: <%= @listing.condition - @listing.poll.average('response').round %>)
-</p>
 
-<p>
-<strong>Grade card:</strong>
-<%= render "polls/form" %>
-</p>
-
-<p>
-  <img src=" <%= @listing.image_front %>" width="200px" alt="<%= @listing.card %>">
-  <img src=" <%= @listing.image_back %>" width="200px" alt="<%= @listing.card %>">
-</p>
-
-<h4>Comments</h4>
-<%= render @listing.comments %>
-
-<h4>Add a comment:</h4>
-<%= render "comments/form" %>
-
+<% end %>

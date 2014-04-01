@@ -31,6 +31,7 @@ class ListingsController < ApplicationController
 
     if @listing.update(params[:listing].permit(
       :id,
+      :status,
       :card,
       :edition,
       :card_type,
@@ -57,6 +58,7 @@ private
   def listing_params
     params.require(:listing).permit(
       :card,
+      :status,
       :edition,
       :card_type,
       :condition,
