@@ -36,14 +36,13 @@ ActiveRecord::Schema.define(version: 20140401214950) do
     t.text     "image_back"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "status",         default: true
+    t.boolean  "status",        default: true
     t.integer  "user_id"
     t.integer  "condition"
     t.integer  "buyer"
-    t.boolean  "buyer_confirm",  default: false
-    t.boolean  "seller_confirm", default: false
-    t.boolean  "admin_confirm",  default: false
-    t.float    "total_amount"
+    t.integer  "buyer_amount"
+    t.integer  "seller_amount"
+    t.integer  "total_amount"
   end
 
   create_table "polls", force: true do |t|
