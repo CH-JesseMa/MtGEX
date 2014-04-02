@@ -108,7 +108,7 @@
       </p>
       <p>
         <strong>
-          Do not click finalize until you are ready. Do not ship the item until the Admin has confirmed receipt of funds. You can cancel before the transaction is finalized by clicking below. Once finalized, you can click the button to pay.
+          When you have finalized a price with shipping email the Admin with the details. Once the Admin confirms, Buyer will pay the total listing price. Do not ship the item until the Admin has confirmed receipt of funds. You can cancel before the transaction is finalized by clicking below. Once finalized, you can click the button to pay.
         </strong>
 
         <% if (current_user.id == @listing.buyer || current_user == @listing.user || current_user.admin) && @listing.total_amount.present? == false %>
