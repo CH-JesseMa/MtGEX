@@ -9,7 +9,6 @@ class ChargesController < ApplicationController
 
   def create
 
-
     @listing = Listing.find(params[:listing_id])
     # Amount in cents
     @amount = @listing.total_amount * 100
