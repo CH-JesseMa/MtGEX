@@ -2,153 +2,153 @@
   <table>
     <tr>
       <td>
-        <table>
-          <tr>
-            <td>
-              <h2>
-                <% if @listing.condition == 1 %>
-                  NM
-                <% elsif @listing.condition == 2 %>
-                  SP
-                <% elsif @listing.condition == 3 %>
-                  MP
-                <% elsif @listing.condition == 4 %>
-                  HP
-                <% else %>
-                  N/A
-                <% end %>
-                  <%= @listing.card %>
-                  (<%= @listing.card_type %>)
-                  [<%= @listing.edition %>]
-                  - $<%= @listing.price %>
-                <% if @listing.status == true %>
-                  <% if current_user.admin || current_user == @listing.user %>
-                    <%= link_to 'Edit Listing', edit_listing_path(@listing) %>
-                  <% end %>
-                <% end %>
+        <h2>
+          <% if @listing.condition == 1 %>
+            NM
+          <% elsif @listing.condition == 2 %>
+            SP
+          <% elsif @listing.condition == 3 %>
+            MP
+          <% elsif @listing.condition == 4 %>
+            HP
+          <% else %>
+            N/A
+          <% end %>
+            <%= @listing.card %>
+            (<%= @listing.card_type %>)
+            [<%= @listing.edition %>]
+            - $<%= @listing.price %>
+          <% if @listing.status == true %>
+            <% if current_user.admin || current_user == @listing.user %>
+              <%= link_to 'Edit Listing', edit_listing_path(@listing) %>
+            <% end %>
+          <% end %>
 
-                <% if current_user.admin %>
-                  <%= link_to 'Delete', listing_path(@listing),
-                    method: :delete, data: { confirm: 'Are you sure?' } %>
-                <% end %>
-              </h2>
-            </td>
-            <td>
-              <% if @listing.status == true && current_user != @listing.user %>
-                <%= form_for(@listing) do |f| %>
-                  <%= f.hidden_field(:status, value: false ) %>
-                  <%= f.hidden_field(:buyer, value: current_user.id) %>
-                  <%= f.submit("Purchase Card") %>
-                <% end %>
-              <% end %>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <strong>
-                Average Grade Rating (<%= pluralize(@listing.poll.length, "rating") %>):
-              </strong>
-              <% if @listing.poll.length == 0 %>
-                Not Graded
-              <% elsif @listing.poll.average('response').round == 1 %>
-                Near Mint
-              <% elsif @listing.poll.average('response').round == 2 %>
-                Slightly Played
-              <% elsif @listing.poll.average('response').round == 3 %>
-                Moderately Played
-              <% elsif @listing.poll.average('response').round == 4 %>
-                Heavily Played
-              <% else %>
-                Not Graded
-              <% end %>
-              (Differential:
-              <% if @listing.poll.length == 0 %>
-                0)
-              <% else %>
-                <%= @listing.condition - @listing.poll.average('response').round %>)
-              <% end %>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <strong>Details:</strong>
-              Posted by <%= @listing.user.username %> on <%= @listing.created_at.strftime("%B %d, %Y at %I:%M %p") %>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <strong>Description:</strong>
-              <%= @listing.description %>
-            </td>
-          </tr>
-          <tr>
-            <td>
-            <img src=" <%= @listing.image_front %>" width="200px" alt="<%= @listing.card %>">
-            <img src=" <%= @listing.image_back %>" width="200px" alt="<%= @listing.card %>">
-            </td>
-          </tr>
-        </table>
-        <table>
-            <th>
-              <td>
-                <% if @listing.status == true %>
-                  <strong>Grade card:</strong>
-                <% end %>
-              </td>
-              <td>
-                <% if @listing.status == true %>
-                  <%= render "polls/form" %>
-                <% end %>
-              </td>
-            </th>
-        </table>
+          <% if current_user.admin %>
+            <%= link_to 'Delete', listing_path(@listing),
+              method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% end %>
+        </h2>
       </td>
       <td>
-        <% if @listing.status == false %>
-          <% if current_user.admin || current_user == @listing.user || current_user.id == @listing.buyer %>
-            <h2>Purchase Control Panel</h2>
-            <p>
-              Buyer and Seller are responsible for negotiating the final purchase terms. When all terms have been finalized, both Buyer and Seller shall post the following: "I understand and accept that the final terms for Listing #<%= @listing.id %> are: (1) Total cost: [Price($<%= @listing.price %>) + Shipping] (2) Shipping Carrier and Tracking Number (3) Buyer's Mailing Address.""
-            </p>
-            <p>
-              Do not click finalize until you are ready. Do not ship the item until the Admin has confirmed receipt of funds. You can cancel before the transaction is finalized by clicking below. Once finalized, you can click the button to pay.
-              <% if (current_user.id == @listing.buyer || current_user == @listing.user || current_user.admin) && @listing.total_amount.present? == false %>
-                  <%= form_for(@listing) do |f| %>
-                    <%= f.hidden_field(:status, value: true ) %>
-                    <%= f.submit("Cancel Purchase") %>
-                  <% end %>
-              <% end %>
-
-                <%= form_for charges_path do %>
-                  <article>
-                    <label class="amount">
-                      Amount: $<%= @listing.total_amount %>
-                    </label>
-                  </article>
-
-                  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-                          data-description="Payment for <%= @listing.id %>"
-                          data-amount="<%= @listing.total_amount * 100 %>"></script>
-                <% end %>
-            </p>
-            <p>
-              <%= render @listing.comments %>
-            </p>
-            <p>
-              <%= render "comments/form" %>
-            </p>
-
-            <% if current_user.admin && @listing.total_amount.present? == false %>
-              <%= form_for(@listing) do |f| %>
-                <%= f.text_field :total_amount %>
-                <%= f.submit("Submit") %>
-              <% end %>
-            <% end %>
-
+        <% if @listing.status == true && current_user != @listing.user %>
+          <%= form_for(@listing) do |f| %>
+            <%= f.hidden_field(:status, value: false ) %>
+            <%= f.hidden_field(:buyer, value: current_user.id) %>
+            <%= f.submit("Purchase Card") %>
           <% end %>
         <% end %>
       </td>
     </tr>
+    <tr>
+      <td>
+        <strong>
+          Average Grade Rating (<%= pluralize(@listing.poll.length, "rating") %>):
+        </strong>
+        <% if @listing.poll.length == 0 %>
+          Not Graded
+        <% elsif @listing.poll.average('response').round == 1 %>
+          Near Mint
+        <% elsif @listing.poll.average('response').round == 2 %>
+          Slightly Played
+        <% elsif @listing.poll.average('response').round == 3 %>
+          Moderately Played
+        <% elsif @listing.poll.average('response').round == 4 %>
+          Heavily Played
+        <% else %>
+          Not Graded
+        <% end %>
+        (Differential:
+        <% if @listing.poll.length == 0 %>
+          0)
+        <% else %>
+          <%= @listing.condition - @listing.poll.average('response').round %>)
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Details:</strong>
+        Posted by <%= @listing.user.username %> on <%= @listing.created_at.strftime("%B %d, %Y at %I:%M %p") %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Description:</strong>
+        <%= @listing.description %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+      <img src=" <%= @listing.image_front %>" width="200px" alt="<%= @listing.card %>">
+      <img src=" <%= @listing.image_back %>" width="200px" alt="<%= @listing.card %>">
+      </td>
+    </tr>
   </table>
+  <table>
+      <th>
+        <td>
+          <% if @listing.status == true %>
+            <strong>Grade card:</strong>
+          <% end %>
+        </td>
+        <td>
+          <% if @listing.status == true %>
+            <%= render "polls/form" %>
+          <% end %>
+        </td>
+      </th>
+  </table>
+
+  <% if @listing.status == false %>
+    <% if current_user.admin || current_user == @listing.user || current_user.id == @listing.buyer %>
+      <h2>Purchase Control Panel</h2>
+      <p>
+        Buyer and Seller are responsible for negotiating the final purchase terms. When all terms have been finalized, both Buyer and Seller shall post the following: "I understand and accept that the final terms for Listing #<%= @listing.id %> are: (1) Buyer shall pay the total cost of: [TBD], which is equal to the Listing Price($<%= @listing.price %>) + Shipping; (2) Seller shall ship the item using USPS and provide the tracking number here; and (3) Buyer shall provide his or her mailing address here."
+      </p>
+      <p>
+        <strong>
+          Do not click finalize until you are ready. Do not ship the item until the Admin has confirmed receipt of funds. You can cancel before the transaction is finalized by clicking below. Once finalized, you can click the button to pay.
+        </strong>
+
+        <% if (current_user.id == @listing.buyer || current_user == @listing.user || current_user.admin) && @listing.total_amount.present? == false %>
+            <%= form_for(@listing) do |f| %>
+              <%= f.hidden_field(:status, value: true ) %>
+              <%= f.submit("Cancel Purchase") %>
+            <% end %>
+        <% end %>
+
+        <% if (current_user.id == @listing.buyer || current_user.admin) && @listing.total_amount.present? == true %>
+
+          <%= form_for charges_path do %>
+            <article>
+              <label class="amount">
+                Amount: $<%= @listing.total_amount %>
+              </label>
+            </article>
+
+            <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                    data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                    data-description="Payment for Listing #<%= @listing.id %>"
+                    data-amount="<%= @listing.total_amount * 100 %>"></script>
+          <% end %>
+
+        <% end %>
+      </p>
+      <p>
+        <%= render @listing.comments %>
+      </p>
+      <p>
+        <%= render "comments/form" %>
+      </p>
+
+      <% if current_user.admin && @listing.total_amount.present? == false %>
+        <%= form_for(@listing) do |f| %>
+          <%= f.text_field :total_amount %>
+          <%= f.submit("Submit") %>
+        <% end %>
+      <% end %>
+
+    <% end %>
+  <% end %>
 <% end %>

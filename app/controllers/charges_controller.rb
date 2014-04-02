@@ -32,7 +32,9 @@ class ChargesController < ApplicationController
       :id,
       :user_id,
       :listing_id,
-      :total_amount)
+      :total_amount,
+      :stripeToken,
+      :stripeEmail)
   end
 
 end
