@@ -112,7 +112,7 @@
           <% if current_user.id == listing.buyer %>
             <strong><= You bought this!</strong>
           <% end %>
-           <% if current_user == listing.user %>
+           <% if current_user == listing.user && listing.status == true %>
             <strong><= Your item was purchased!</strong>
           <% end %>
         </td>
