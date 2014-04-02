@@ -111,7 +111,13 @@
               Buyer and Seller are responsible for negotiating the final purchase terms. When all terms have been finalized, both Buyer and Seller shall post the following: "I understand and accept that the final terms for Listing #<%= @listing.id %> are: (1) Total cost: [Price($<%= @listing.price %>) + Shipping] (2) Shipping Carrier and Tracking Number (3) Buyer's Mailing Address.""
             </p>
             <p>
-              Do not click finalize until you are ready. Do not ship the item until the Admin has confirmed receipt of funds.
+              Do not click finalize until you are ready. Do not ship the item until the Admin has confirmed receipt of funds. You can cancel the purchase by clicking below:
+              <% if (current_user.id == @listing.buyer || current_user == @listing.user || current_user.admin) && @listing.total_amount.present? == false %>
+                  <%= form_for(@listing) do |f| %>
+                    <%= f.hidden_field(:status, value: true ) %>
+                    <%= f.submit("Cancel Purchase") %>
+                  <% end %>
+              <% end %>
             </p>
             <p>
               <%= render @listing.comments %>
@@ -119,38 +125,14 @@
             <p>
               <%= render "comments/form" %>
             </p>
-            <table>
-              <tr>
-                <td>
-                  <% if current_user.admin && @listing.buyer_amount == @listing.seller_amount %>
-                    <%= form_for(@listing) do |f| %>
-                      <%= f.text_field :total_amount %>
-                      <%= f.submit("Confirm Total Price") %>
-                    <% end %>
-                  <% end %>
-                </td>
-                <td>
-                  <% if current_user.id == @listing.buyer %>
-                    <%= form_for(@listing) do |f| %>
-                      <%= f.hidden_field(:status, value: true ) %>
-                      <%= f.submit("Cancel Purchase") %>
-                    <% end %>
-                  <% end %>
-                  <% if current_user == @listing.user %>
-                    <%= form_for(@listing) do |f| %>
-                      <%= f.hidden_field(:status, value: true ) %>
-                      <%= f.submit("Cancel Purchase") %>
-                    <% end %>
-                  <% end %>
-                  <% if current_user.admin %>
-                    <%= form_for(@listing) do |f| %>
-                      <%= f.hidden_field(:status, value: true ) %>
-                      <%= f.submit("Cancel Purchase") %>
-                    <% end %>
-                  <% end %>
-                </td>
-              </tr>
-            </table>
+
+            <% if current_user.admin && @listing.total_amount.present? == false %>
+              <%= form_for(@listing) do |f| %>
+                <%= f.text_field :total_amount %>
+                <%= f.submit("Submit") %>
+              <% end %>
+            <% end %>
+
           <% end %>
         <% end %>
       </td>
