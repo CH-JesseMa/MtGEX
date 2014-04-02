@@ -5,7 +5,6 @@ class ListingsController < ApplicationController
   end
 
   def create
-    binding.pry
     @listing = current_user.listings.build(listing_params)
     if @listing.save
       redirect_to @listing
