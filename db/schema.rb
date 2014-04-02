@@ -11,26 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140402012603) do
+ActiveRecord::Schema.define(version: 20140402152552) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "charges", force: true do |t|
-    t.integer  "listing_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer "listing_id"
   end
 
   create_table "comments", force: true do |t|
-    t.text     "body"
-    t.integer  "listing_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "user_id"
+    t.text    "body"
+    t.integer "listing_id"
+    t.integer "user_id"
   end
-
-  add_index "comments", ["listing_id"], name: "index_comments_on_listing_id", using: :btree
 
   create_table "listings", force: true do |t|
     t.string   "card"
@@ -50,21 +44,17 @@ ActiveRecord::Schema.define(version: 20140402012603) do
   end
 
   create_table "polls", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "listing_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "response"
+    t.integer "user_id"
+    t.integer "listing_id"
+    t.integer "response"
   end
 
   create_table "users", force: true do |t|
-    t.string   "username"
-    t.string   "email"
-    t.string   "password_digest"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "admin",           default: false
-    t.integer  "purchase_id"
+    t.string  "username"
+    t.string  "email"
+    t.string  "password_digest"
+    t.boolean "admin",           default: false
+    t.integer "purchase_id"
   end
 
 end
