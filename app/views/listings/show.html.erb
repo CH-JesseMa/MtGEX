@@ -111,13 +111,26 @@
               Buyer and Seller are responsible for negotiating the final purchase terms. When all terms have been finalized, both Buyer and Seller shall post the following: "I understand and accept that the final terms for Listing #<%= @listing.id %> are: (1) Total cost: [Price($<%= @listing.price %>) + Shipping] (2) Shipping Carrier and Tracking Number (3) Buyer's Mailing Address.""
             </p>
             <p>
-              Do not click finalize until you are ready. Do not ship the item until the Admin has confirmed receipt of funds. You can cancel the purchase by clicking below:
+              Do not click finalize until you are ready. Do not ship the item until the Admin has confirmed receipt of funds. You can cancel before the transaction is finalized by clicking below. Once finalized, you can click the button to pay.
               <% if (current_user.id == @listing.buyer || current_user == @listing.user || current_user.admin) && @listing.total_amount.present? == false %>
                   <%= form_for(@listing) do |f| %>
                     <%= f.hidden_field(:status, value: true ) %>
                     <%= f.submit("Cancel Purchase") %>
                   <% end %>
               <% end %>
+
+                <%= form_for charges_path do %>
+                  <article>
+                    <label class="amount">
+                      Amount: $<%= @listing.total_amount %>
+                    </label>
+                  </article>
+
+                  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                          data-description="Payment for <%= @listing.id %>"
+                          data-amount="<%= @listing.total_amount * 100 %>"></script>
+                <% end %>
             </p>
             <p>
               <%= render @listing.comments %>

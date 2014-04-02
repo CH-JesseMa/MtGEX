@@ -23,6 +23,7 @@ class Listing < ActiveRecord::Base
   has_many :poll, dependent: :destroy
   has_one :purchase, dependent: :destroy
   has_many :purchasedetails, dependent: :destroy
+  has_one :charge
   validates :card, presence: true
   validates :edition, presence: true
   validates :price, presence: true

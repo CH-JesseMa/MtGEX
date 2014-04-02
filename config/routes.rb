@@ -7,12 +7,11 @@ Mtgex::Application.routes.draw do
   root 'welcome#index'
 
   # CRUD routes
-
+  resources :charges
   resources :users
   resources :listings do
     resources :comments
     resources :polls
-    resources :charges
   end
 
   # session routes

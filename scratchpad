@@ -1,1 +1,1 @@
-@listing.total_amount.present? == true
+<% if (current_user.id == @listing.buyer || current_user.admin) && @listing.total_amount.present? == true %>
