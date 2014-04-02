@@ -145,7 +145,7 @@
       <% if current_user.admin && @listing.total_amount.present? == false %>
         <%= form_for(@listing) do |f| %>
           <%= f.text_field :total_amount %>
-          <%= f.submit("Submit") %>
+          <%= f.submit("Submit Total Price") %>
         <% end %>
       <% end %>
 
