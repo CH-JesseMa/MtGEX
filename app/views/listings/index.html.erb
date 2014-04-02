@@ -108,6 +108,11 @@
         <td>
           <%= listing.user.username %>
         </td>
+        <td>
+          <% if current_user.id == listing.buyer %>
+            <strong><= You bought this!</strong>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </table>

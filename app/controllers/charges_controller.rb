@@ -1,4 +1,9 @@
 class ChargesController < ApplicationController
+  def index
+    @listing = Listing.find(params[:listing_id])
+    redirect_to @listing
+  end
+
   def new
   end
 
