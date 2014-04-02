@@ -49,3 +49,7 @@ gem "pry-rails"
 gem 'annotate'
 gem 'rails-erd'
 end
+
+# Stripe
+
+gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
