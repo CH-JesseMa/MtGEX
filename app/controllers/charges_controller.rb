@@ -3,8 +3,9 @@ class ChargesController < ApplicationController
   end
 
   def create
-    @listing = Listing.find_by(id: charge_params[:listing_id] )
 
+
+    @listing = Listing.find(params[:listing_id])
     # Amount in cents
     @amount = @listing.total_amount * 100
 
@@ -23,6 +24,8 @@ class ChargesController < ApplicationController
   rescue Stripe::CardError => e
     flash[:error] = e.message
     redirect_to charges_path
+
+  redirect_to root_path
   end
 
   private

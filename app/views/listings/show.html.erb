@@ -120,7 +120,7 @@
 
         <% if (current_user.id == @listing.buyer || current_user.admin) && @listing.total_amount.present? == true %>
 
-          <%= form_for charges_path do %>
+          <%= form_tag("/listings/#{@listing.id}/charges", method: "post") do %>
             <article>
               <label class="amount">
                 Amount: $<%= @listing.total_amount %>
@@ -128,7 +128,7 @@
             </article>
 
             <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                    data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                    data-key="<%= ENV["STRIPE_PUBLISHABLE_KEY"] %>"
                     data-description="Payment for Listing #<%= @listing.id %>"
                     data-amount="<%= @listing.total_amount * 100 %>"></script>
           <% end %>
